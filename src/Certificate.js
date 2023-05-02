@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import axios from "axios";
 import "./Certificate.scss";
 
@@ -38,25 +40,39 @@ export default function Certificate() {
             <div className="small">of appreciation</div>
           </h1>
           <h2 className="sub-title">PROUDLY PRESENTED TO</h2>
-          <h3 className="name">{data.name}</h3>
+          <h3 className="name">{data.name || <Skeleton width="50%" />}</h3>
           <p className="desc">
-            For the outstanding completion of {data.course} on the <br /> NOLTE
-            FZE LEARNING PLATFORM
+            For the outstanding completion of {data.course || "..."} on the{" "}
+            <br /> NOLTE FZE LEARNING PLATFORM
           </p>
           <div className="flex">
             <div className="col">
               <div className="top">
-                <strong>{data.manager}</strong>
+                <strong>{data.manager || <Skeleton width="50%" />}</strong>
                 <div>Training Manager</div>
               </div>
-              <div className="date">Dubai, {formatDate(data.createdAt)}</div>
+              <div className="date">
+                Dubai,{" "}
+                {data.createdAt ? (
+                  formatDate(data.createdAt)
+                ) : (
+                  <Skeleton width="50%" />
+                )}
+              </div>
             </div>
             <div className="col">
               <div className="top">
-                <strong>{data.md}</strong>
+                <strong>{data.md || <Skeleton width="50%" />}</strong>
                 <div>Managing Director</div>
               </div>
-              <div className="date">Dubai, {formatDate(data.createdAt)}</div>
+              <div className="date">
+                Dubai,
+                {data.createdAt ? (
+                  formatDate(data.createdAt)
+                ) : (
+                  <Skeleton width="50%" />
+                )}
+              </div>
             </div>
           </div>
           <img
